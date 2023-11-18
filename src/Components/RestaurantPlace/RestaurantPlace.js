@@ -5,18 +5,23 @@ import axios from "axios";
 function RestaurantPlace() {
     const [restaurant, setRestaurant] = React.useState([]);
 
-    axios.get('https://nextjs-orpin-omega-98.vercel.app/api/restaurants')
-        .then(response => {
-            // Handle success.
-            console.log('Data: ', response.data);
-            setRestaurant(response.data);
-        })
-        .catch(error => {
-            // Handle any errors that occurred during the request
-            console.error('Error fetching data:', error);
-            // Handle the error appropriately, such as showing an error message to the user
-        });
 
+  const fetchdata = async () => {
+        await axios.get('https://nextjs-orpin-omega-98.vercel.app/api/restaurants')
+          .then(response => {
+              // Handle success.
+              console.log('Data: ', response.data);
+              setRestaurant(response.data);
+          })
+          .catch(error => {
+              // Handle any errors that occurred during the request
+              console.error('Error fetching data:', error);
+
+          });
+  }
+    useEffect(() => {
+        fetchdata();
+    }, []);
 // Make a GET request to the API with the configured headers
     return (
         <>
