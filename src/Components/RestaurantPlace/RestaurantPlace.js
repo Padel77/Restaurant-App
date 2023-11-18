@@ -3,13 +3,13 @@ import './RestaurantPlace.css';
 // import axiosConfig  from "../../axiosConfig/axiosConfig";
 import axios from "axios";
 function RestaurantPlace() {
-// const [restaurant, setRestaurant] = React.useState([]);
+    const [restaurant, setRestaurant] = React.useState([]);
 
     axios.get('https://nextjs-orpin-omega-98.vercel.app/api/restaurants')
         .then(response => {
-            // Handle the successful response
-            console.log('Response:', response.data); // Access the response data
-            // Perform operations with the response data here
+            // Handle success.
+            console.log('Data: ', response.data);
+            setRestaurant(response.data);
         })
         .catch(error => {
             // Handle any errors that occurred during the request
@@ -18,14 +18,18 @@ function RestaurantPlace() {
         });
 
 // Make a GET request to the API with the configured headers
-
-
     return (
-        <div>
-            <h1>RestaurantPlace</h1>
-
-        </div>
+        <>
+            <div>
+                <h1>RestaurantPlace</h1>
+                {restaurant.map((item, index) => (
+                    <div key={index}>
+                        <h1>{item.restaurant_name}</h1>
+                        <h1>{item.state}</h1>
+                    </div>
+                ))}
+            </div>
+        </>
     );
 }
-
-export default RestaurantPlace;
+export default RestaurantPlace
